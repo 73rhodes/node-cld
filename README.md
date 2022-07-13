@@ -92,6 +92,18 @@ Pass an HTTP "Content-Encoding" value as a hint
 ## Warning
 Once the module has been installed, the underlying C sources will remain in the ```deps/cld``` folder and continue to occupy considerable space. This is because they will be required if you ever need to run `npm rebuild`. If you are under severe constraints you can delete this folder and reclam >100M
 
+## Prebuilds
+In this fork, I'm working on getting some pre-built binaries using the `prebuildify` and `prebuildify-cross` tools.
+
+After installing these modules as dev dependencies, here's how I built pre-built binaries for Mac OS X and Linux (from a MacBook):
+
+ - Ran `prebuildify --napi --strip` to get a `prebuilds/darwin-x86` binary.
+ - Ran `prebuildify-cross -i centos7-devtoolset7 -t 16.13.2 --napi --strip` to get a `prebuilds/linux-x86` binary. I don't know if specifying the `-t` target it needed, but I set it to match my local version of node.
+
+After generating these binaries I made the recommended changes for loading a prebuilt binary using `node-gyp-build`.
+
+For testing locally, what I've done so far is run `npm pack` inside the project folder to generate a tarball, then extracted the tarball to see what it contains and make sure it's got the pre-built binaries in it.  Then I used the tarball to install cld as a dependency in another project `npm install ../cld-2.8.1.tgz` and tested with both OS X and Linux.  So far so good.
+
 ## Copyright
 Copyright 2011-2015, Blagovest Dachev.
 
