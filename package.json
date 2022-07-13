@@ -14,10 +14,12 @@
   "dependencies": {
     "glob": "7",
     "node-addon-api": "*",
+    "node-gyp-build": "^4.5.0",
     "underscore": "^1.12.1"
   },
   "scripts": {
     "build": "node-gyp rebuild",
+    "install": "node-gyp-build",
     "test": "node test/runner.js",
     "postinstall": "node bin/postinstall.js"
   },
@@ -41,5 +43,10 @@
   ],
   "engines": {
     "node": ">=12.0.0"
-  }
+  },
+  "devDependencies": {
+    "node-gyp": "^9.0.0",
+    "prebuildify": "^5.0.0",
+    "prebuildify-cross": "^5.0.0"
+   }
 }
