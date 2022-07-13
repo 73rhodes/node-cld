@@ -1,0 +1,4 @@
+.lock*
+build
+*.sw[a-z]
+node_modules
